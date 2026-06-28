@@ -18,7 +18,7 @@ RUN uv sync --frozen --no-install-project --no-dev
 COPY main.py ./
 
 # Drop root: the app only reads its own files and talks to the API server.
-RUN useradd --system --uid 65532 --no-create-home appuser \
+RUN useradd --system --uid 1000 --no-create-home appuser \
     && chown -R appuser:appuser /app
 USER appuser
 
