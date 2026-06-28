@@ -9,7 +9,7 @@ from kubernetes.client.exceptions import ApiException
 import yaml
 
 logging.basicConfig(level=logging.INFO)
-log = logging.getLogger('KubeTunnelConfigCollector')
+log = logging.getLogger('TraefikTunnelConfigProvider')
 
 app = FastAPI()
 try:
@@ -22,7 +22,6 @@ except config.ConfigException:
     active_context = config.list_kube_config_contexts()[1]
     api_client = config.new_client_from_config(context=active_context.get('name'))
 
-v1 = client.CoreV1Api(api_client=api_client)
 custom = client.CustomObjectsApi(api_client=api_client)
 
 
