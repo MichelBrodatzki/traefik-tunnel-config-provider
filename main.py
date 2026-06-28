@@ -106,18 +106,6 @@ async def get_traefik_config() -> Response:
             continue
         hostname = hostname[0]
 
-        ips = [
-            address.get('value')
-            for address in (gateway.get('status') or {}).get('addresses') or []
-            if address.get('type') == 'IPAddress'
-        ]
-        if len(ips) == 0:
-            log.warning(
-                'Gateway %s has no assigned IPs. Skipping ...',
-                gw_name
-            )
-            continue
-
         if public_tunnel_enable:
             public_tunnel_router_rules = [
                 f'Host(`{hostname}`)'
@@ -157,7 +145,7 @@ async def get_traefik_config() -> Response:
 
         config['http']['services'][gw_name] = {
             'loadBalancer': {
-                'servers': [f'https://{ip}' for ip in ips]
+                'servers': [f'https://{hostname}']
             }
         }
 
