@@ -1,6 +1,6 @@
 [project]
 name = "traefik-tunnel-config-provider"
-version = "0.1.0"
+version = "1.0.0"
 description = "Provides an HTTP endpoint serving a traefik config based on annotated Gateway resources inside a k8s cluster."
 readme = "README.md"
 requires-python = ">=3.13"
